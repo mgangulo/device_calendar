@@ -768,13 +768,13 @@ class CalendarDelegate : PluginRegistry.RequestPermissionsResultListener {
         if (rfcRecurrenceRule.until != null) {
             recurrenceRule.endDate = rfcRecurrenceRule.until.timestamp
         }
-
         when (rfcRecurrenceRule.freq) {
             Freq.WEEKLY, Freq.MONTHLY, Freq.YEARLY -> {
                 recurrenceRule.daysOfWeek = rfcRecurrenceRule.byDayPart?.mapNotNull {
                     DayOfWeek.values().find { dayOfWeek -> dayOfWeek.ordinal == it.weekday.ordinal }
                 }?.toMutableList()
             }
+            else -> null
         }
 
         val rfcRecurrenceRuleString = rfcRecurrenceRule.toString()
